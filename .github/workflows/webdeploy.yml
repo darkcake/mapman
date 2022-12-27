@@ -1,0 +1,26 @@
+name: Deploy
+on:
+ push:
+     branches:
+       - main
+ jobs:
+   deploy:
+     runs-on: ubuntu-latest
+     strategy:
+       matrix:
+         node-version: [18.x]
+     steps:
+       - uses: actions/checkout@v2
+       - uses: actions/setup-node@v1
+         with:
+           node-version: ${{ matrix.node-version }}
+       # Setup key
+       - run: set -eu
+       - run: mkdir "$HOME/.ssh"
+       - run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > "$HOME/.ssh/key"
+       - run: chmod 600 "$HOME/.ssh/key"
+       # Build
+       # Deploy
+      #  - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress . root@134.209.227.100:/home/mapman
+      #  - run: "cd web-build"
+       - run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete web-build/* root@134.209.227.100:/home/mapman

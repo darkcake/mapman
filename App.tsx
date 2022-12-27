@@ -8,9 +8,10 @@ export default function App() {
   return (
 
     <View> 
-     <Text>Hey</Text>
+     <Text></Text>
+      <Map /> 
       
-      <Map /> </View>
+      </View>
 
    
   );

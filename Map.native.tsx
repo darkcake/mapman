@@ -1,1 +1,3 @@
-default export () = <div>MapMan! Mobile</div>
+import { Text } from "react-native";
+
+export default () => <Text>{'MapMan!'}</Text>
