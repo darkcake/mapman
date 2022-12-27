@@ -1,0 +1,1 @@
+default export () = <div>MapMan! Mobile</div>
